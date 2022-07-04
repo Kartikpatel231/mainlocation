@@ -29,7 +29,6 @@ public class UserController {
     public List<UserModel> getAllUsers() {
         UserModel user1 = new UserModel().setUserName("Test 1").setEmail("test1@gmail.com");
         UserModel user2 = new UserModel().setUserName("Test 2").setEmail("test2@gmail.com");
-
         return Arrays.asList(user1, user2);
     }
 }
