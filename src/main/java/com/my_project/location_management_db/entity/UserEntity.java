@@ -1,28 +1,20 @@
 package com.my_project.location_management_db.entity;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
-
-@Setter
-@Getter
-@Entity(name = "User_Table")
-@NoArgsConstructor
+@Entity(name="User_Table")
+@Data                             //getter and setter,equal and hastable,to string
+@NoArgsConstructor                //no constructor with arguments
 public class UserEntity {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "User_Id")
+    @Id                             //denotes to primary key
+    @GeneratedValue(strategy = GenerationType.AUTO)        //value automatic increment by jpa
     private long id;
-
-    @Column(name = "User_Name")
-    private String userName;
-
-    private String userPassword;
-    private String mobileNo;
+    @Column(name="FULL_NAME")
+    private String fullName;
+    private String  mobileNumber;
     private String email;
-    private String address;
+    private String password;
 }
