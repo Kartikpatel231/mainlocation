@@ -16,14 +16,23 @@ public class UserController {
 
     @PostMapping("/users")
     public ResponseEntity<Boolean> login(@RequestBody UserModal userModal) throws BusinessException {
-        ResponseEntity<Boolean> responseEntity=null;
+        //ResponseEntity<Boolean> responseEntity=null;
 
-        boolean result=userService.login(userModal);
-        responseEntity=new ResponseEntity<>(result,HttpStatus.OK);
+        boolean result = userService.login(userModal);
+        ResponseEntity<Boolean> responseEntity = new ResponseEntity<>(result, HttpStatus.OK);
+        return responseEntity;
+    }
 
+    @PostMapping("/users/register")
+    public ResponseEntity<Long> register(@RequestBody UserModal userModal) throws BusinessException {
+        //ResponseEntity<Long> responseEntity=null;
 
-
-       /* try {
+        Long result = userService.register(userModal);
+        ResponseEntity<Long> responseEntity = new ResponseEntity<>(result, HttpStatus.CREATED);
+        return responseEntity;
+    }
+}
+ /* try {
             boolean result=userService.login(userModal);
 
                 responseEntity=new ResponseEntity<>(result,HttpStatus.OK);
@@ -32,6 +41,3 @@ public class UserController {
         } catch (BusinessException be) {
 
         }*/
-        return responseEntity;
-    }
-}
