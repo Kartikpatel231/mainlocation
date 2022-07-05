@@ -6,15 +6,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserConverter {
-    public UserEntity convertModelToEntity(UserModal userModal)
-    {
-   UserEntity userEntity=new UserEntity();
+    public UserEntity convertModelToEntity(UserModal userModal) {
+        UserEntity userEntity = new UserEntity();
         userEntity.setEmail(userModal.getEmail());
-        userEntity.setUserName(userModal.getUserName());
-        userEntity.setMobileNo(userEntity.getMobileNo());
-        userEntity.setAddress(userEntity.getAddress());
-        userEntity.setUserPassword(userEntity.getUserPassword());
+        userEntity.setFullName(userModal.getFullName());
+        userEntity.setMobileNumber(userModal.getMobileNumber());
+        userEntity.setPassword(userModal.getPassword());
 
         return userEntity;
-}
+    }
 }

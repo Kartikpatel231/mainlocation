@@ -4,18 +4,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-@Data
 @Entity(name="User_Table")
-@NoArgsConstructor
+@Data                             //getter and setter,equal and hastable,to string
+@NoArgsConstructor                //no constructor with arguments
 public class UserEntity {
     @Column(name = "User_Id")
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id                             //denotes to primary key
+    @GeneratedValue(strategy = GenerationType.AUTO)        //value automatic increment by jpa
     private long id;
-    @Column(name="User_Name")
-    private String userName;
-    private String userPassword;
-    private String  mobileNo;
+    @Column(name="FULL_NAME")
+    private String fullName;
+    private String  mobileNumber;
     private String email;
-    private String address;
+    private String password;
 }
