@@ -13,26 +13,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class Serviceimpl implements UserService {
+public class ServiceImpl implements UserService {
     @Autowired
     private UserRepository entityRepository;
+
     @Override
     public boolean login(UserModal userModal) throws BusinessException {
-       boolean result=false;
-        UserEntity userEntity= entityRepository.findByEmailAndPassword(userModal.getEmail(),userModal.getPassword());
-     if(userEntity==null){
+        boolean result;
+        UserEntity userEntity = entityRepository.findByEmailAndPassword(userModal.getEmail(), userModal.getPassword());
+        if (userEntity == null) {
 
-         List<ErrorModal>errorList=new ArrayList<>();
+            List<ErrorModal> errorList = new ArrayList<>();
 
-         ErrorModal errorModal=new ErrorModal();
-         errorModal.setCode(ErrorType.AUTH_INVALID_CREDENTIALS.toString());
-         errorModal.setMessage("Incorrect email or password");
+            ErrorModal errorModal = new ErrorModal();
+            errorModal.setCode(ErrorType.AUTH_INVALID_CREDENTIALS.toString());
+            errorModal.setMessage("Incorrect email or password");
 
-         errorList.add(errorModal);
-         throw new BusinessException(errorList);
-     }else {
-         result=true;
-     }
-     return result;
+            errorList.add(errorModal);
+            throw new BusinessException(errorList);
+        } else {
+            result = true;
+        }
+        return result;
     }
 }
