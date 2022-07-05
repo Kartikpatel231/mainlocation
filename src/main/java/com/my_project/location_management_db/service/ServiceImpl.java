@@ -16,9 +16,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class Serviceimpl implements UserService {
+public class ServiceImpl implements UserService {
     @Autowired
     private UserRepository entityRepository;
+<<<<<<< HEAD:src/main/java/com/my_project/location_management_db/service/Serviceimpl.java
     @Autowired
     private UserConverter userConverter;
     @Autowired
@@ -42,12 +43,28 @@ public class Serviceimpl implements UserService {
             errorModal.setCode(ErrorType.AUTH_INVALID_CREDENTIALS.toString());
             errorModal.setMessage("Incorrect email or password");
 
+=======
+
+    @Override
+    public boolean login(UserModal userModal) throws BusinessException {
+        boolean result;
+        UserEntity userEntity = entityRepository.findByEmailAndPassword(userModal.getEmail(), userModal.getPassword());
+        if (userEntity == null) {
+
+            List<ErrorModal> errorList = new ArrayList<>();
+
+            ErrorModal errorModal = new ErrorModal();
+            errorModal.setCode(ErrorType.AUTH_INVALID_CREDENTIALS.toString());
+            errorModal.setMessage("Incorrect email or password");
+
+>>>>>>> 9f94eddf5b3efc1521be2354b6eded1d26572fc6:src/main/java/com/my_project/location_management_db/service/ServiceImpl.java
             errorList.add(errorModal);
             throw new BusinessException(errorList);
         } else {
             result = true;
         }
         return result;
+<<<<<<< HEAD:src/main/java/com/my_project/location_management_db/service/Serviceimpl.java
     }
 
     public Long register(UserModal userModal) throws BusinessException {
@@ -75,5 +92,7 @@ public class Serviceimpl implements UserService {
 
         UserEntity userEntity1 = entityRepository.save(userEntity);
         return userEntity1.getId();
+=======
+>>>>>>> 9f94eddf5b3efc1521be2354b6eded1d26572fc6:src/main/java/com/my_project/location_management_db/service/ServiceImpl.java
     }
 }
