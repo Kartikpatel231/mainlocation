@@ -8,6 +8,8 @@ import com.my_project.location_management_db.excaption.ErrorModal;
 import com.my_project.location_management_db.userEntityRepository.UserRepository;
 import com.my_project.location_management_db.modal.UserModal;
 import com.my_project.location_management_db.validation.UserValidator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -16,10 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ServiceImpl implements UserService {
+public class ServiceIMPL implements UserService {
+
+    private final Logger logger=LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserRepository entityRepository;
-<<<<<<< HEAD:src/main/java/com/my_project/location_management_db/service/Serviceimpl.java
     @Autowired
     private UserConverter userConverter;
     @Autowired
@@ -27,6 +30,8 @@ public class ServiceImpl implements UserService {
 
     @Override
     public boolean login(UserModal userModal) throws BusinessException {
+        logger.debug("Entering method login");
+
         //list check of email and password
         List<ErrorModal> errorModelList=userValidator.validateRequest(userModal);
         if(!CollectionUtils.isEmpty(errorModelList)){
@@ -43,28 +48,15 @@ public class ServiceImpl implements UserService {
             errorModal.setCode(ErrorType.AUTH_INVALID_CREDENTIALS.toString());
             errorModal.setMessage("Incorrect email or password");
 
-=======
-
-    @Override
-    public boolean login(UserModal userModal) throws BusinessException {
-        boolean result;
-        UserEntity userEntity = entityRepository.findByEmailAndPassword(userModal.getEmail(), userModal.getPassword());
-        if (userEntity == null) {
-
-            List<ErrorModal> errorList = new ArrayList<>();
-
-            ErrorModal errorModal = new ErrorModal();
-            errorModal.setCode(ErrorType.AUTH_INVALID_CREDENTIALS.toString());
-            errorModal.setMessage("Incorrect email or password");
-
->>>>>>> 9f94eddf5b3efc1521be2354b6eded1d26572fc6:src/main/java/com/my_project/location_management_db/service/ServiceImpl.java
             errorList.add(errorModal);
+            logger.debug("Invalid login attempt");
             throw new BusinessException(errorList);
-        } else {
+        } if(userEntity!=null) {
             result = true;
+            logger.debug("Login was success");
         }
+        logger.debug("Exiting method login");
         return result;
-<<<<<<< HEAD:src/main/java/com/my_project/location_management_db/service/Serviceimpl.java
     }
 
     public Long register(UserModal userModal) throws BusinessException {
@@ -92,7 +84,6 @@ public class ServiceImpl implements UserService {
 
         UserEntity userEntity1 = entityRepository.save(userEntity);
         return userEntity1.getId();
-=======
->>>>>>> 9f94eddf5b3efc1521be2354b6eded1d26572fc6:src/main/java/com/my_project/location_management_db/service/ServiceImpl.java
     }
 }
+
