@@ -5,4 +5,5 @@ import com.my_project.location_management_db.modal.UserModal;
 
 public interface UserService {
      boolean login(UserModal userModal) throws BusinessException; //throws BusinessException;
+      Long register(UserModal userModal) throws BusinessException; //throws BusinessException;
 }
